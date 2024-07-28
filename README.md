@@ -1,6 +1,12 @@
 # TreinamentoDigiHub
-Projeto para treinamento da tecnologia java SpringBoot 3
+Projeto para treinamento da tecnologia java 
+
+# Tecnologias utilizadas
+SpringBoot 3
 Spring Data JPA
 Java 21
+Lombok
 
-# Crud de cadastro de Clientes
+# Funcionalidade
+
+Micro serviço de Gerenciamento de Clientes
