@@ -1,9 +1,13 @@
 package com.microservico.digihub.service;
 
 import com.microservico.digihub.entity.Cliente;
+import com.microservico.digihub.entity.Endereco;
 import com.microservico.digihub.repository.ClienteRepository;
+import com.microservico.digihub.repository.EnderecoRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,10 +21,26 @@ public class ClienteService {
 
     private final ClienteRepository clienteRepository;
 
-    @Transactional
-    public Cliente salvar(Cliente cliente) {
+    private final EnderecoRepository enderecoRepository;
 
-        return clienteRepository.save(cliente);
+    @Transactional
+    public Cliente  salvar(Cliente cliente) {
+
+        if (cliente.getEndereco() != null) {
+            // Atribui o cliente ao endereço
+            cliente.getEndereco().setCliente(cliente);
+        }
+
+        // Salva o cliente
+        Cliente savedCliente = clienteRepository.save(cliente);
+
+        // Salva o endereço se existir
+        if (cliente.getEndereco() != null) {
+            enderecoRepository.save(cliente.getEndereco());
+        }
+
+        return savedCliente;
+
     }
 
     @Transactional
@@ -44,7 +64,7 @@ public class ClienteService {
             cliente.setDocumento(alteraCliente.getDocumento());
             cliente.setRazao_social(alteraCliente.getRazao_social());
             cliente.setRepresentante(alteraCliente.getRepresentante());
-            cliente.setEndereco(alteraCliente.getEndereco());
+            //cliente.setEndereco(alteraCliente.getEndereco());
             cliente.setStatus(alteraCliente.getStatus());
 
             return clienteRepository.save(cliente);
@@ -64,10 +84,13 @@ public class ClienteService {
         return clienteRepository.findByrepresentante(representante);
     }
 
+    /*
     @Transactional(readOnly = true)
     public List<Cliente> buscarPorEstado(String estado) {
         return clienteRepository.findByestado(estado);
     }
+
+     */
 
     @Transactional(readOnly = true)
     public List<Cliente> buscarPorNome(String nome) {

@@ -2,6 +2,7 @@ package com.microservico.digihub.web.controller;
 
 
 import com.microservico.digihub.entity.Cliente;
+import com.microservico.digihub.entity.Endereco;
 import com.microservico.digihub.service.ClienteService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -23,8 +24,9 @@ public class ClienteController
 
     @PostMapping
     public ResponseEntity<Cliente> create(@RequestBody Cliente cliente){
-        clienteService.salvar(cliente);
-        return  ResponseEntity.status(HttpStatus.CREATED).build();
+
+        Cliente savedCliente =  clienteService.salvar(cliente);
+        return  ResponseEntity.status(HttpStatus.CREATED).body(savedCliente);
 
     }
 
@@ -56,6 +58,7 @@ public class ClienteController
         return ResponseEntity.ok(clientes);
     }
 
+    /*
     @GetMapping("/buscarPorEstado")
     public ResponseEntity<List<Cliente>> buscarPorEstado(@RequestParam String estado) {
         List<Cliente> clientes = clienteService.buscarPorEstado(estado);
@@ -64,6 +67,8 @@ public class ClienteController
         }
         return ResponseEntity.ok(clientes);
     }
+
+     */
 
     @GetMapping("/buscarPorNome")
     public ResponseEntity<List<Cliente>> buscarPorNome(@RequestParam String nome) {

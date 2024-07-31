@@ -10,7 +10,7 @@ public interface ClienteRepository extends JpaRepository<Cliente, UUID> {
 
     List<Cliente> findByrepresentante(String representante);
 
-    List<Cliente> findByestado(String estado);
+    //List<Cliente> findByestado(String estado);
 
     List<Cliente> findByNomeContaining(String nome);
 }

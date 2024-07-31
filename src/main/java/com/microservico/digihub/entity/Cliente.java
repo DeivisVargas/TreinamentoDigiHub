@@ -1,5 +1,6 @@
 package com.microservico.digihub.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,11 +36,9 @@ public class Cliente {
     @Column(name = "status" , nullable = false , length = 25)
     private Status status = Status.ATIVO;
 
-    @Column(name = "endereco" , nullable = false , length = 200)
-    private String endereco ;
-
-    @Column(name = "estado" , length = 2)
-    private String estado ;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "cliente", orphanRemoval = true, optional = true)
+    @JsonIgnore
+    private Endereco endereco;
 
     //Gerando um Id
     @PrePersist
