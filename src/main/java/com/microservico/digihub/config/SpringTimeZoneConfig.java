@@ -10,7 +10,7 @@ public class SpringTimeZoneConfig {
 
     //Faz com que apos a classe ser inicializada o metodo construtor é executado.
     @PostConstruct
-     public void timeZoneConfig(){
-         TimeZone.setDefault(TimeZone.getTimeZone("America/Sao_paulo"));
-     }
+    public void timeZoneConfig() {
+        TimeZone.setDefault(TimeZone.getTimeZone("America/Sao_paulo"));
+    }
 }
