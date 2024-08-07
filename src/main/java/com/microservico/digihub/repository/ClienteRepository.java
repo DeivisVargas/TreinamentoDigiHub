@@ -2,6 +2,8 @@ package com.microservico.digihub.repository;
 
 import com.microservico.digihub.domain.entity.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository; //fornece os metodos prontos para manipular banco de dados
+import org.springframework.data.jpa.repository.Query;
+
 import java.util.UUID;
 import java.util.List;
 

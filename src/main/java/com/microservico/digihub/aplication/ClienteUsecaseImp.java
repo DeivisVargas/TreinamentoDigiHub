@@ -8,6 +8,8 @@ import com.microservico.digihub.repository.ClienteRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Component
 public class ClienteUsecaseImp implements ClienteUsecase {
@@ -31,32 +33,40 @@ public class ClienteUsecaseImp implements ClienteUsecase {
     }
 
     @Override
-    public Cliente buscarPorId(Long id) {
-        return null;
+    public ClienteDTO buscarPorId(String id) {
+
+        Optional<Cliente> cliente = clienteRepository.findById(UUID.fromString(id));
+
+        //TODO implementar tratamento de erro
+        /*
+        Não usar try catch
+        * */
+        return cliente.map(clienteMapper::toClienteDTO).orElse(null);
+
     }
 
     @Override
-    public List<Cliente> buscarTodos() {
+    public List<ClienteDTO> buscarTodos() {
         return List.of();
     }
 
     @Override
-    public void deletarPorId(Long id) {
+    public void deletarPorId(String id) {
 
     }
 
     @Override
-    public Cliente atualizar(Cliente cliente) {
+    public ClienteDTO atualizar(Cliente cliente) {
         return null;
     }
 
     @Override
-    public Cliente buscarPorNome(String nome) {
+    public ClienteDTO buscarPorNome(String nome) {
         return null;
     }
 
     @Override
-    public Cliente buscarPorRepresentante(String representante) {
+    public ClienteDTO buscarPorRepresentante(String representante) {
         return null;
     }
 }

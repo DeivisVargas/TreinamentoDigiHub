@@ -24,7 +24,10 @@ public class ClienteMapper {
                 .representante(createDto.representante())
                 .status(Status.valueOf(createDto.status()))
                 .build();
-        cliente.setEndereco(createDto.endereco().stream().map(endereco -> toEndereco(endereco, cliente)).toList());
+        cliente.setEndereco(
+                createDto.endereco()
+                        .stream()
+                        .map(endereco -> toEndereco(endereco, cliente)).toList());
 
         return  cliente;
     }

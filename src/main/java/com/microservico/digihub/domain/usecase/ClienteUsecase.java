@@ -9,15 +9,15 @@ public interface ClienteUsecase {
 
     ClienteDTO salvar(ClienteDTO cliente);
 
-    Cliente buscarPorId(Long id);
+    ClienteDTO buscarPorId(String id);
 
-    List<Cliente> buscarTodos();
+    List<ClienteDTO> buscarTodos();
 
-    void deletarPorId(Long id);
+    void deletarPorId(String id);
 
-    Cliente atualizar(Cliente cliente);
+    ClienteDTO atualizar(Cliente cliente);
 
-    Cliente buscarPorNome(String nome);
+    ClienteDTO buscarPorNome(String nome);
 
-    Cliente buscarPorRepresentante(String representante);
+    ClienteDTO buscarPorRepresentante(String representante);
 }

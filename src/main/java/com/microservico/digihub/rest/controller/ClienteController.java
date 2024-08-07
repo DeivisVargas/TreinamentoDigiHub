@@ -31,8 +31,14 @@ public class ClienteController {
 
     @GetMapping
     public ResponseEntity<List<Cliente>> getAll() {
-        List<Cliente> clientes = clienteUsecase.buscarTodos();
-        return ResponseEntity.ok(clientes);
+        return null;
+        //ResponseEntity.ok("");
+
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ClienteDTO> getById(@PathVariable String id) {
+        return ResponseEntity.status(HttpStatus.OK).body(clienteUsecase.buscarPorId(id));
 
     }
 
