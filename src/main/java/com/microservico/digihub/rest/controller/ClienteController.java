@@ -30,9 +30,8 @@ public class ClienteController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Cliente>> getAll() {
-        return null;
-        //ResponseEntity.ok("");
+    public ResponseEntity<List<ClienteDTO>> getAll() {
+        return ResponseEntity.status(HttpStatus.OK).body(clienteUsecase.buscarTodos());
 
     }
 

@@ -5,11 +5,13 @@ import com.microservico.digihub.aplication.dto.mapper.ClienteMapper;
 import com.microservico.digihub.domain.entity.Cliente;
 import com.microservico.digihub.domain.usecase.ClienteUsecase;
 import com.microservico.digihub.repository.ClienteRepository;
+import com.microservico.digihub.domain.exception.ClienteNaoEncontradoException;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Component
 public class ClienteUsecaseImp implements ClienteUsecase {
@@ -37,17 +39,25 @@ public class ClienteUsecaseImp implements ClienteUsecase {
 
         Optional<Cliente> cliente = clienteRepository.findById(UUID.fromString(id));
 
+        //Optional<Cliente> cliente = clienteRepository.findById(UUID.fromString(id));
+
         //TODO implementar tratamento de erro
         /*
         Não usar try catch
         * */
-        return cliente.map(clienteMapper::toClienteDTO).orElse(null);
+        return cliente.map(clienteMapper::toClienteDTO)
+                .orElseThrow(() -> new ClienteNaoEncontradoException("Cliente com ID " + id + " não encontrado"));
 
     }
 
     @Override
     public List<ClienteDTO> buscarTodos() {
-        return List.of();
+
+        List<Cliente> clientes = clienteRepository.findAll();
+
+        return clientes.stream()
+                .map(clienteMapper::toClienteDTO) // Mapeia cada Cliente para ClienteDTO
+                .collect(Collectors.toList());
     }
 
     @Override
