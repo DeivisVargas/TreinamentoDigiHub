@@ -39,8 +39,6 @@ public class ClienteUsecaseImp implements ClienteUsecase {
 
         Optional<Cliente> cliente = clienteRepository.findById(UUID.fromString(id));
 
-        //Optional<Cliente> cliente = clienteRepository.findById(UUID.fromString(id));
-
         //TODO implementar tratamento de erro
         /*
         Não usar try catch
